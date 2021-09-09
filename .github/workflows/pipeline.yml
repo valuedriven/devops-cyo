@@ -35,3 +35,4 @@ jobs:
         name: deploy
         path: frontend/build
     - run: aws s3 cp frontend/build s3://devops-cyo --recursive --acl public-read
+
