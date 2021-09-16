@@ -22,7 +22,18 @@ jobs:
       with:
         name: package
         path: frontend/build
-
+        
+  acceptance:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - run: echo "Estágio acceptance"
+    
+  release:
+    runs-on: ubuntu-latest
+    needs: acceptance
+    steps:
+    - run: echo "Estágio release"
 
   # deploy:
   #   runs-on: ubuntu-latest
