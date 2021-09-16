@@ -18,21 +18,41 @@ jobs:
     - run: npm --prefix frontend run build
     - uses: actions/upload-artifact@v2
       with:
-        name: deploy
+        name: package
         path: frontend/build
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-      AWS_EC2_METADATA_DISABLED: true
+
+  publish:
+    name: "Publish to GitHub Packages"
+    needs: [package]
+    runs-on: ubuntu-18.04
+    if: github.repository_owner == 'aaronpowell'
     steps:
     - uses: actions/download-artifact@v2
       with:
-        name: deploy
-        path: frontend/build
-    - run: aws s3 cp frontend/build s3://devops-cyo --recursive --acl public-read
+        name: package
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        registry-url: https://npm.pkg.github.com/
+        scope: ${{ github.repository_owner }}
+    - run: echo "registry=https://npm.pkg.github.com/${{ github.repository_owner }}" >> .npmrc
+    - run: echo .npmrc
+    - run: npm publish $(ls *.tgz)
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   env:
+  #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #     AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+  #     AWS_EC2_METADATA_DISABLED: true
+  #   steps:
+  #   - uses: actions/download-artifact@v2
+  #     with:
+  #       name: deploy
+  #       path: frontend/build
+  #   - run: aws s3 cp frontend/build s3://devops-cyo --recursive --acl public-read
