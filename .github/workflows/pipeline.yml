@@ -16,6 +16,7 @@ jobs:
         cache: 'npm'
     - run: npm --prefix frontend install
     - run: npm run --prefix frontend test -- --watchAll=false --coverage=true
+    - run: npx --prefix frontend eslint . 
     - run: npm --prefix frontend run build
     - uses: actions/upload-artifact@v2
       with:
