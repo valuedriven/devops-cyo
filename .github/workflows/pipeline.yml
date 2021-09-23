@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: '14'
         registry-url: https://valuedriven.jfrog.io/artifactory/api/npm/default-valuedriven-npm-local/
-        cache: 'npm'
+        # cache: 'npm'
     - run: npm --prefix frontend install
     - run: npm run --prefix frontend test -- --watchAll=false --coverage=true
     - run: npx --prefix frontend eslint . 
