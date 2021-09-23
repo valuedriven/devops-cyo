@@ -17,7 +17,7 @@ jobs:
         node-version: '14'
         registry-url: https://valuedriven.jfrog.io/artifactory/default-npm-virtual/
         # cache: 'npm'
-    - run: echo /home/runner/work/_temp/.npmrc
+    - run: more /home/runner/work/_temp/.npmrc
     - run: npm --prefix frontend install
       env:
         NODE_AUTH_TOKEN: ${{ secrets.JFROG_TOKEN }}
