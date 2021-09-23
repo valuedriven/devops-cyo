@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-    NODE_AUTH_TOKEN: ${{ secrets.JFROG_TOKEN }}
+  NODE_AUTH_TOKEN: ${{ secrets.JFROG_TOKEN }}
  
 jobs:
   build:
@@ -16,8 +16,11 @@ jobs:
       with:
         node-version: '14'
         registry-url: https://valuedriven.jfrog.io/artifactory/api/npm/default-valuedriven-npm-local/
+        always-auth: true
         # cache: 'npm'
     - run: npm --prefix frontend install
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.JFROG_TOKEN }}
     - run: npm run --prefix frontend test -- --watchAll=false --coverage=true
     - run: npx --prefix frontend eslint . 
     - run: npm --prefix frontend run build
