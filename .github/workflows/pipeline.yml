@@ -18,6 +18,7 @@ jobs:
         registry-url: https://valuedriven.jfrog.io/artifactory/api/npm/default-valuedriven-npm-local/
         # always-auth: true
         # cache: 'npm'
+    - run: npm cache clean --force
     - run: npm --prefix frontend install
       env:
         NODE_AUTH_TOKEN: ${{ secrets.JFROG_TOKEN }}
