@@ -7,4 +7,5 @@ jobs:
   ansible-version:
     runs-on: ubuntu-latest
     steps:
-    - run: ansible --version
+    - name: verificar versão Ansible
+      run: ansible --version
