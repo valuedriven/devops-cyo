@@ -1,0 +1,10 @@
+name: Ansible
+
+on:
+  workflow_dispatch
+
+jobs:
+  ansible-version:
+    runs-on: ubuntu-latest
+    steps:
+    - run: ansible --version
