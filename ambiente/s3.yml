@@ -4,21 +4,28 @@
 
   vars:
     workspace_path: "{{ lookup('env', 'GITHUB_WORKSPACE') }}"      
+    bucket_name: devops-cyo
 
   tasks:
-    - name: garantir instalação dos módulos botocore e boto3
+    - name: instalação dos módulos botocore e boto3
       pip:
         name: [ "boto3", "botocore"]
         extra_args:   "--user"
+
     # - name: upload de arquivos
     #   community.aws.s3_sync:
     #     bucket: conchayro
     #     file_root: "{{ workspace_path }}/frontend/build"
-
-    - name: Simple PUT operation
+    - name: criação de bucket
       aws_s3:
-        bucket: mybucket
-        object: /conchayoro
+        bucket: "{{ bucket_name }}"
+        mode: create
+        permission: public-read
+
+    - name: upload de arquivos
+      aws_s3:
+        bucket: "{{ bucket_name }}"
+        object: /webpage
         src: "{{ workspace_path }}/frontend/build"
         mode: put
 
