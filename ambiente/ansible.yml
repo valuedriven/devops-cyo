@@ -1,10 +1,6 @@
 ---
 - name: Testa os managed nodes
   hosts: localhost
-  remote_user: root
-  vars:
-    http_port: 80
-    max_clients: 200
 
   tasks:
     - name: executa ping 
@@ -14,3 +10,4 @@
     - name: exibe resultado
       debug: 
         msg: "{{ resultado }}"
+
