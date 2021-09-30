@@ -4,9 +4,6 @@ on:
   push:
     branches: [ main ]
 
-env:
-  NODE_AUTH_TOKEN: ${{ secrets.JFROG_TOKEN }}
- 
 jobs:
   build:
     runs-on: ubuntu-latest

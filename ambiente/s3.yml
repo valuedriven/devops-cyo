@@ -6,7 +6,7 @@
     - name: upload de arquivos
       community.aws.s3_sync:
       bucket: conchayro
-      file_root: deploy
+      file_root: frontend/build
 
 
 
