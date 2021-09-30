@@ -44,8 +44,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-      AWS_EC2_METADATA_DISABLED: true
-      ansible_python_interpreter: /usr/bin/python3.8
+      AWS_EC2_METADATA_DISABLED: true      
     steps:
     - uses: actions/checkout@v2
     - uses: actions/download-artifact@v2
@@ -55,4 +54,4 @@ jobs:
     - run: ansible-galaxy collection install community.aws
     - run: which python
     - run: ls /usr/bin/python*
-    - run: ansible-playbook ambiente/s3.yml
+    - run: ansible-playbook ambiente/s3.yml -e "ansible_python_interpreter=/usr/bin/python3.8"
