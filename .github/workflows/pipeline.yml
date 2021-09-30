@@ -51,7 +51,5 @@ jobs:
       with:
         name: deploy
         path: frontend/build
-    - run: ansible-galaxy collection install community.aws
-    - run: which python
-    - run: ls /usr/bin/python*
+    # - run: ansible-galaxy collection install community.aws
     - run: ansible-playbook ambiente/s3.yml --extra-vars "ansible_python_interpreter=/usr/bin/python3.8"
