@@ -12,4 +12,5 @@
       register: resultado
       
     - name: exibe resultado
-      debug: "{{ resultado }}"
+      debug: 
+        msg: "{{ resultado }}"
