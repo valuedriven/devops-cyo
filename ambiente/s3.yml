@@ -20,13 +20,13 @@
     #     bucket: conchayro
     #     file_root: "{{ workspace_path }}/frontend/build"
     - name: criação de bucket
-      aws_s3:
+      amazon.aws.aws_s3:
         bucket: "{{ bucket_name }}"
         mode: create
         permission: public-read
 
     - name: upload de arquivos
-      aws_s3:
+      amazon.aws.aws_s3:
         bucket: "{{ bucket_name }}"
         object: /webpage        
         src: "{{ workspace_path }}/frontend/build"
