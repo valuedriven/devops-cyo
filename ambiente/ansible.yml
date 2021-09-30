@@ -1,6 +1,6 @@
 ---
 - name: Testa os managed nodes
-  hosts: remote
+  hosts: dev
   remote_user: root
   vars:
     http_port: 80
