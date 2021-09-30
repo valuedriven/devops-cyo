@@ -18,7 +18,7 @@
     - name: Simple PUT operation
       aws_s3:
         bucket: mybucket
-        #object: /my/desired/key.txt
+        object: /conchayoro
         src: "{{ workspace_path }}/frontend/build"
         mode: put
 
