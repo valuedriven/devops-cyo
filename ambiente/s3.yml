@@ -2,11 +2,14 @@
 - name: deploy no S3
   hosts: localhost
 
+  vars:
+    workspace_path: "{{ lookup('env', 'GITHUB_WORKSPACE') }}"  
+
   tasks:
     - name: upload de arquivos
       community.aws.s3_sync:
       bucket: conchayro
-      file_root: frontend/build
+      file_root: "{{ workspace_path }}/frontend/build"
 
 
 
