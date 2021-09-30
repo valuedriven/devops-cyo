@@ -54,4 +54,4 @@ jobs:
     - run: ansible-galaxy collection install community.aws
     - run: which python
     - run: ls /usr/bin/python*
-    - run: ansible-playbook ambiente/s3.yml -e "ansible_python_interpreter=/usr/bin/python3.8"
+    - run: ansible-playbook ambiente/s3.yml --extra-vars "ansible_python_interpreter=/usr/bin/python3.8"

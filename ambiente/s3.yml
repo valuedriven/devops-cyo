@@ -6,10 +6,10 @@
     workspace_path: "{{ lookup('env', 'GITHUB_WORKSPACE') }}"      
 
   tasks:
-    # - name: garantir instalação dos módulos botocore e boto3
-    #   pip:
-    #     name: [ "boto3", "botocore"]
-    #     extra_args:   "--user"
+    - name: garantir instalação dos módulos botocore e boto3
+      pip:
+        name: [ "boto3", "botocore"]
+        extra_args:   "--user"
     - name: upload de arquivos
       community.aws.s3_sync:
         bucket: conchayro
