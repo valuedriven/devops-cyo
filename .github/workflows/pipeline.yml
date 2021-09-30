@@ -19,7 +19,7 @@ jobs:
     - run: npm --prefix frontend run build
     - uses: actions/upload-artifact@v2
       with:
-        name: package
+        name: deploy
         path: frontend/build
 
   # deploy:
