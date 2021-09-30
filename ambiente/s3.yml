@@ -8,8 +8,8 @@
   tasks:
     - name: upload de arquivos
       community.aws.s3_sync:
-      bucket: conchayro
-      file_root: "{{ workspace_path }}/frontend/build"
+        bucket: conchayro
+        file_root: "{{ workspace_path }}/frontend/build"
 
 
 
