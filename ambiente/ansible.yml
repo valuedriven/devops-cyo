@@ -1,0 +1,11 @@
+---
+- name: Testa os managed nodes
+  hosts: remote
+  remote_user: root
+  vars:
+    http_port: 80
+    max_clients: 200
+
+  tasks:
+    - name: executa ping 
+      ansible.utils.ping
