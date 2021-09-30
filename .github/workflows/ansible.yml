@@ -7,4 +7,5 @@ jobs:
   ansible-version:
    runs-on: ubuntu-latest
    steps:
+   - run: ls -la
    - run: ansible-playbook -i ambiente/inventory ambiente/ansible.yml
