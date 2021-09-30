@@ -15,22 +15,22 @@
         name: [ "boto3", "botocore"]
         extra_args:   "--user"
 
-    # - name: upload de arquivos
-    #   community.aws.s3_sync:
-    #     bucket: conchayro
-    #     file_root: "{{ workspace_path }}/frontend/build"
-    - name: criação de bucket
-      amazon.aws.aws_s3:
-        bucket: "{{ bucket_name }}"
-        mode: create
-        permission: public-read
-
     - name: upload de arquivos
-      amazon.aws.aws_s3:
+      community.aws.s3_sync:
         bucket: "{{ bucket_name }}"
-        object: /webpage        
-        src: "{{ workspace_path }}/frontend/build"
-        mode: put
+        file_root: "{{ workspace_path }}/frontend/build"
+    # - name: criação de bucket
+    #   amazon.aws.aws_s3:
+    #     bucket: "{{ bucket_name }}"
+    #     mode: create
+    #     permission: public-read
+
+    # - name: upload de arquivos
+    #   amazon.aws.aws_s3:
+    #     bucket: "{{ bucket_name }}"
+    #     object: /webpage        
+    #     src: "{{ workspace_path }}/frontend/build"
+    #     mode: put
 
 
 
