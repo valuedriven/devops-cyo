@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
 env:
-  ANSIBLE_PYTHON_INTERPRETER: /usr/local/python3
+  ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
 jobs:
   setup-environment:
