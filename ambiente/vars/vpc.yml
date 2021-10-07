@@ -1,6 +1,10 @@
 ---
-project_name: devops-cyo
-provider: aws
-aws_region: us-east-1
-aws_availability_zone: us-east-1a
-access_key: "{{ project_name }}-key"
+vpc_name: "{{ project_name }}-vpc"
+subnet_name: "{{ project_name }}-subnet"
+igw_name: "{{ project_name }}-igw"
+route_table_name: "{{ project_name }}-route-table"
+vpcCidrBlock: '10.0.0.0/16'
+subNetCidrBlock: '10.0.0.0/24'
+port22CidrBlock: '0.0.0.0/0'
+port80CidrBlock: '0.0.0.0/0'
+destinationCidrBlock: '0.0.0.0/0'
