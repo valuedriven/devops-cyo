@@ -51,7 +51,7 @@
             
     - name: Mudança de permissão do arquivo com a private key
       ansible.builtin.file:
-        path: {{ arquivo }}
+        path: "{{ arquivo }}"
         mode: '0644'
       vars:
         arquivo: "{{ playbook_dir }}/{{ access_key }}"      
