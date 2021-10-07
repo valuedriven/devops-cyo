@@ -1,6 +1,6 @@
 ---
 - name: Instalação de pacotes complementares
-  hosts: "{{ hostvars['virtual_host']['hostname'] }}"
+  hosts: all
   gather_facts: true
   become: true
 
