@@ -45,5 +45,5 @@
         name: "virtual_host2"
         subnet_id: "{{ ec2_result.instances }}"
         
-     - debug:
-         msg: "{{ ec2_result.instances }}"
+    - debug:
+        msg: "{{ ec2_result.instances }}"
