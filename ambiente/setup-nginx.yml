@@ -1,7 +1,7 @@
 ---
 - name: Instalação de pacotes complementares
   hosts: all
-  gather_facts: true
+  gather_facts: false
   become: true
 
   tasks:
