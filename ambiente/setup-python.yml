@@ -1,6 +1,8 @@
 ---
 - name: configuração de bibliotecas Python
   hosts: localhost
+  vars_files:
+  - vars/global.yml
 
   environment:
     AWS_REGION: "{{ aws_region }}"
