@@ -1,7 +1,7 @@
 ---
 - name: Instalação de pacotes complementares
-  hosts: all
-  gather_facts: false
+  hosts: "{{ ec2_hosts }}"
+  gather_facts: true
   become: true
 
   tasks:
