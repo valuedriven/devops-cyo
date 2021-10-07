@@ -38,7 +38,4 @@
         deployable: true
         wait: yes
         state: running
-      register: ec2_result
-      
-   - name: Instalação do Nginx
-     import_tasks: setup-nginx.yml  
+      register: ec2_result    
