@@ -34,7 +34,7 @@
     - name: Provisionamento de instância
       community.aws.ec2_instance:
         region: "{{ aws_region }}"
-        vpc_subnet_id: "{{ subnet_info[0].subnet_id }}"
+        vpc_subnet_id: "{{ subnet_info.subnets[0].subnet_id }}"
         name: "{{ instance_name }}"
         key_name: "{{ access_key }}"
         security_group: "{{ security_group_name }}"
