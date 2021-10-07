@@ -1,6 +1,6 @@
 ---
 - name: Instalação de pacotes complementares
-  hosts: "{{ ec2_hosts }}"
+  hosts: "{{ hostvars['virtual_host']['hostname'] }}"
   gather_facts: true
   become: true
 
