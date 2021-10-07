@@ -49,10 +49,15 @@
         force: yes
       when: existing_ec2_key_result.msg != "key pair already exists"
       
-    - name: find files
-      find:
+    - find:
         paths: .
         recurse: yes
+      register: result
+     
+    - debug:
+        msg: "{{ [item.path] }} "
+      with_items: "{{ result.files }}"
+      
 
     - name: Carregamento da chave privada para memória
       set_fact:
