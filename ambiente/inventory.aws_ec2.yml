@@ -1,0 +1,23 @@
+plugin: amazon.aws.aws_ec2
+
+cache: yes
+cache_plugin: ansible.builtin.jsonfile
+cache_timeout: 7200
+cache_connection: /tmp/aws_inventory
+cache_prefix: aws_ec2
+
+filters:
+  tag:ambiente:
+    - production
+
+keyed_groups:
+  - key: tags.sistema
+    prefix: tag_sistema_
+    separator: ""
+  - key: tags.ambiente
+    prefix: tag_ambiente_
+    separator: ""
+groups:
+  deployable: "'deployable' in (tags|list)"    
+compose:
+  ansible_host: public_ip_address
