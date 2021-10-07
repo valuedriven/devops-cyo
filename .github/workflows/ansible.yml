@@ -7,12 +7,11 @@ env:
    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
    AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-   ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
 jobs:
   setup-environment:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v2
-   - run: ansible-playbook ambiente/provisioning.yml
+   - run: ansible-playbook ambiente/provisioning.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
 
