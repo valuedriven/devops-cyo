@@ -15,3 +15,6 @@ jobs:
    - uses: actions/checkout@v2
    - run: ansible-playbook ambiente/create-vpc.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
    - run: ansible-playbook ambiente/create-keys.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
+   - run: ansible-playbook ambiente/provision-ec2.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
+   - run: ansible-playbook ambiente/setup-nginx.yml --inventory ambiente/config/inventory.aws_ec2.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
+
