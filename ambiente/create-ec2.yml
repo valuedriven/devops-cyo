@@ -43,7 +43,4 @@
     - name: Registro das máquinas virtuais criadas
       add_host:
         name: "virtual_host2"
-        subnet_id: "{{ ec2_result.instances }}"
-        
-    - debug:
-        msg: "{{ ec2_result.instances }}"
+        hostname: "{{ ec2_result.private_ip_address }}"       
