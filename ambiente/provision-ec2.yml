@@ -20,21 +20,11 @@
   tasks:
     - name: configura bibliotecas Python
       import_tasks: setup-python.yml  
-      
-    - name: Obtenção dos detalhes da subnet
-      amazon.aws.ec2_vpc_subnet_info:
-        region: "{{ aws_region }}"
-        filters:
-          "tag:Name": “{{ subnet_name }}”
-      register: subnet_info
-     
-    - debug:
-         msg: "{{ subnet_info }}"
-
+          
     - name: Provisionamento de instância
       community.aws.ec2_instance:
         region: "{{ aws_region }}"
-        vpc_subnet_id: "{{ subnet_info.subnets[0].subnet_id }}"
+        vpc_subnet_id: "{{ subnet_id }}"
         name: "{{ instance_name }}"
         key_name: "{{ access_key }}"
         security_group: "{{ security_group_name }}"
