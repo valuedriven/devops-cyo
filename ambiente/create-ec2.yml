@@ -39,3 +39,11 @@
         wait: yes
         state: running
       register: ec2_result    
+      
+    - name: Registro das máquinas virtuais criadas
+      add_host:
+        name: "virtual_host2"
+        subnet_id: "{{ ec2_result.instances }}"
+        
+     - debug:
+         msg: "{{ ec2_result.instances }}"
