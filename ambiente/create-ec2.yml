@@ -42,5 +42,5 @@
       
     - name: Registro das máquinas virtuais criadas
       add_host:
-        name: "virtual_host2"
-        hostname: "{{ ec2_result.private_ip_address }}"       
+        name: "ec2_hosts"
+        hostname: "{{ ec2_result.instances[0].private_ip_address }}"       
