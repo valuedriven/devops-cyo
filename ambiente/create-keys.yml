@@ -63,7 +63,7 @@
       set_fact:
         private_key_result: "{{ lookup('file', arquivo) }}"
       vars:
-        arquivo: "{{ playbook_dir }}/{{ access_key }}"
+        arquivo: "{{ access_key }}"
 
     - name: Registro da chave privada no AWS Secret
       community.aws.aws_secret:
