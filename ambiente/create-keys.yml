@@ -48,22 +48,19 @@
         key_material: "{{ keypair_result.public_key }}"
         force: yes
       when: existing_ec2_key_result.msg != "key pair already exists"
-      
-    - find:
-        paths: .
-        recurse: yes
-      register: result
-     
-    - debug:
-        msg: "{{ [item.path] }} "
-      with_items: "{{ result.files }}"
-      
+            
+    - name: Mudança de permissão do arquivo com a private key
+      ansible.builtin.file:
+        path: {{ arquivo }}
+        mode: '0644'
+      vars:
+        arquivo: "{{ playbook_dir }}/{{ access_key }}"      
 
     - name: Carregamento da chave privada para memória
       set_fact:
         private_key_result: "{{ lookup('file', arquivo) }}"
       vars:
-        arquivo: "{{ access_key }}"
+        arquivo: "{{ playbook_dir }}/{{ access_key }}"
 
     - name: Registro da chave privada no AWS Secret
       community.aws.aws_secret:
