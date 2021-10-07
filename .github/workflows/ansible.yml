@@ -14,4 +14,4 @@ jobs:
    steps:
    - uses: actions/checkout@v2
    - run: ansible-playbook ambiente/create-vpc.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
-   - run: ansible-playbook -vvvvv ambiente/create-keys.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
+   - run: ansible-playbook ambiente/create-keys.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
