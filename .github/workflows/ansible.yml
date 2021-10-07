@@ -3,12 +3,9 @@ name: Ansible
 on:
   workflow_dispatch
 
-env:
-  ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
-
 jobs:
   setup-environment:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v2
-   - run: ansible-playbook ambiente/create-vpc.yml
+   - run: ansible-playbook ambiente/create-vpc.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
