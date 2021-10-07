@@ -1,4 +1,4 @@
 - name: instalação dos módulos botocore e boto3
-   pip:
-     name: [ "boto3", "botocore"]
-     extra_args:   "--user"
+  pip:
+    name: [ "boto3", "botocore"]
+    extra_args:   "--user"
