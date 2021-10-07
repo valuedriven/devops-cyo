@@ -1,14 +1,5 @@
 ---
-- name: configuração de bibliotecas Python
-  hosts: localhost
-  vars_files:
-  - vars/global.yml
-
-  environment:
-    AWS_REGION: "{{ aws_region }}"
-
-  tasks:
-    - name: instalação dos módulos botocore e boto3
-      pip:
-        name: [ "boto3", "botocore"]
-        extra_args:   "--user"
+- name: instalação dos módulos botocore e boto3
+   pip:
+     name: [ "boto3", "botocore"]
+     extra_args:   "--user"
