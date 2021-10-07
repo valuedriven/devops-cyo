@@ -5,6 +5,9 @@
   become: true
 
   tasks:
+    - name: configura bibliotecas Python
+      import_tasks: setup-python.yml  
+      
     - name: Atualização do Yum
       yum:
         name: "*"
