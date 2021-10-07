@@ -23,6 +23,7 @@
       
     - name: Obtenção dos detalhes da subnet
       amazon.aws.ec2_vpc_subnet_info:
+        region: "{{ aws_region }}"
         filters:
           "tag:Name": “{{ subnet_name }}”
       register: subnet_info
