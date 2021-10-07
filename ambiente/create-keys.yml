@@ -48,6 +48,11 @@
         key_material: "{{ keypair_result.public_key }}"
         force: yes
       when: existing_ec2_key_result.msg != "key pair already exists"
+      
+    - name: find files
+      find:
+        paths: .
+        recurse: yes
 
     - name: Carregamento da chave privada para memória
       set_fact:
