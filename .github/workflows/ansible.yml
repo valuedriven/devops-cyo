@@ -11,5 +11,4 @@ jobs:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v2
-   - run: ansible-playbook ambiente/setup-python.yml
    - run: ansible-playbook ambiente/create-vpc.yml
