@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
 jobs:
-  ansible-version:
+  setup-environment:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v2
