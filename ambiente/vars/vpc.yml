@@ -8,3 +8,4 @@ subNetCidrBlock: '10.0.0.0/24'
 port22CidrBlock: '0.0.0.0/0'
 port80CidrBlock: '0.0.0.0/0'
 destinationCidrBlock: '0.0.0.0/0'
+security_group_name: "{{ project_name }}-security-group"
