@@ -15,7 +15,7 @@
 
   tasks:
   - name: configura bibliotecas Python
-    import_tasks: setup-python.yaml
+    import_tasks: setup-python.yml
     
   - name: Criação de VPC
     ec2_vpc_net:
