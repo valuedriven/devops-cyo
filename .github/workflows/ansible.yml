@@ -14,5 +14,5 @@ jobs:
    steps:
    - uses: actions/checkout@v2
    - run: pip3 install boto3 botocore --user
-   - run: ansible-playbook ambiente/provisioning.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
+   - run: ansible-playbook ambiente/provisioning.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3.9'
 

@@ -11,11 +11,7 @@
     AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
     AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
     AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
-  
   tasks:
-    - name: configura bibliotecas Python
-      import_tasks: setup-python.yml   
-
     - name: Verificação da existência de chave no EC2
       amazon.aws.ec2_key:
         name: "{{ access_key }}"
@@ -40,21 +36,19 @@
         mode: 0600
       when: existing_ec2_key_result.msg != "key pair already exists"
       register: keypair_result
-              
     - name: Registro de par de chaves no EC2
       amazon.aws.ec2_key:
         name: "{{ access_key }}"
         region: "{{ aws_region }}"
         key_material: "{{ keypair_result.public_key }}"
-        force: yes
+        force: true
       when: existing_ec2_key_result.msg != "key pair already exists"
-            
     - name: Mudança de permissão do arquivo com a private key
       ansible.builtin.file:
         path: "{{ arquivo }}"
         mode: '0644'
       vars:
-        arquivo: "{{ playbook_dir }}/{{ access_key }}"      
+        arquivo: "{{ playbook_dir }}/{{ access_key }}"
 
     - name: Carregamento da chave privada para memória
       set_fact:

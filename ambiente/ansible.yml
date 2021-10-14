@@ -3,11 +3,10 @@
   hosts: localhost
 
   tasks:
-    - name: executa ping 
-      ping:
-      register: resultado
-      
-    - name: exibe resultado
-      debug: 
-        msg: "{{ resultado }}"
+  - name: executa ping
+    ping:
+    register: resultado
 
+  - name: exibe resultado
+    debug:
+      msg: "{{ resultado }}"

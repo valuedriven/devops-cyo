@@ -1,26 +1,25 @@
 ---
 - name: Instalação de pacotes complementares
-  hosts: "{{ ec2_result.instances[0].public_ip_address }}"
+  hosts: "virtual_host_ec2"
   gather_facts: true
   become: true
 
   tasks:
-    - name: configura bibliotecas Python
-      import_tasks: setup-python.yml  
-      
+    # - name: configura bibliotecas Python
+    #   import_tasks: setup-python.yml
     - name: Atualização do Yum
       yum:
         name: "*"
-        state: latest
+        # state: latest
 
     - name: Habilitação Nginx para Amazon linux 2
       shell: "amazon-linux-extras enable nginx1"
-      become: yes
+      become: true
 
     - name: Instalação do Nginx
       yum:
         name: nginx
-        state: latest
+        # state: latest
 
     - name: Habilitação do Nginx como serviço
       service:

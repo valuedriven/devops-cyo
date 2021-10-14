@@ -16,30 +16,28 @@
 
   vars:
     subnet_id: "{{ hostvars['virtual_host']['subnet_id'] }}"
-  
   tasks:
   #  - name: configura bibliotecas Python
-  #    import_tasks: setup-python.yml  
-          
-   - name: Provisionamento de instância
-     community.aws.ec2_instance:
-       region: "{{ aws_region }}"
-       vpc_subnet_id: "{{ subnet_id }}"
-       name: "{{ instance_name }}"
-       key_name: "{{ access_key }}"
-       security_group: "{{ security_group_name }}"
-       instance_type: "{{ instance_type }}"
-       image_id: "{{ image_id }}"      
-       network:
-         assign_public_ip: true        
-       tags:
-         sistema: "{{ project_name }}"
-         ambiente: "production"
-         deployable: true
-       wait: yes
-       state: running
-     register: ec2_result    
-      
-   - name: Registro das máquinas virtuais criadas
-     add_host:
-      name: "{{ ec2_result.instances[0].public_ip_address }}"
+  #    import_tasks: setup-python.yml
+    - name: Provisionamento de instância
+      community.aws.ec2_instance:
+        region: "{{ aws_region }}"
+        vpc_subnet_id: "{{ subnet_id }}"
+        name: "{{ instance_name }}"
+        key_name: "{{ access_key }}"
+        security_group: "{{ security_group_name }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ image_id }}"
+        network:
+          assign_public_ip: true
+        tags:
+          sistema: "{{ project_name }}"
+          ambiente: "production"
+          deployable: true
+        wait: true
+        state: running
+      register: ec2_result
+    - name: Registro das máquinas virtuais criadas
+      add_host:
+        name: "virtual_host_ec2"
+        public_ip_address: "{{ ec2_result.instances[0].public_ip_address }}"
