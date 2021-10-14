@@ -1,0 +1,10 @@
+---
+- name: Instalação de pacotes complementares
+  gather_facts: true
+  become: true
+
+- name: instalação dos módulos botocore e boto3
+  pip:
+    executable: pip3
+    name: ["boto3", "botocore"]
+    extra_args: "--user"
