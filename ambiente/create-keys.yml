@@ -2,7 +2,7 @@
 - name: Criação e registro de pares de chave
   hosts: localhost
   connection: local
-  gather_facts: false
+  gather_facts: true
   become: true
   vars_files:
     - vars/global.yml
@@ -11,7 +11,14 @@
     AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
     AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
     AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
+
   tasks:
+    - name: instalação dos módulos botocore e boto3
+      pip:
+        name: ["boto3", "botocore"]
+        extra_args: "--user"
+
+
     - name: Verificação da existência de chave no EC2
       amazon.aws.ec2_key:
         name: "{{ access_key }}"

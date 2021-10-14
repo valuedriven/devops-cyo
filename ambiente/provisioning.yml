@@ -1,9 +1,11 @@
-- name: teste
+- name: provisioning
+  hosts: localhost
+  gather_facts: true
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
-- import_playbook: setup-python2.yml
+# - import_playbook: setup-python2.yml
 - import_playbook: create-keys.yml
 - import_playbook: create-vpc.yml
-- import_playbook: create-ec2.yml
+# - import_playbook: create-ec2.yml
 - import_playbook: setup-nginx.yml

@@ -14,7 +14,6 @@
 
     - name: Habilitação Nginx para Amazon linux 2
       shell: "amazon-linux-extras enable nginx1"
-      become: true
 
     - name: Instalação do Nginx
       yum:

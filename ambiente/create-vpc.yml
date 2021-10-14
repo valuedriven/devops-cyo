@@ -12,8 +12,6 @@
     AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
     AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
   tasks:
-  # - name: configura bibliotecas Python
-  #   import_tasks: setup-python.yml
     - name: Criação de VPC
       ec2_vpc_net:
         region: "{{ aws_region }}"
