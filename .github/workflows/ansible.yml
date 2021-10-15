@@ -13,7 +13,7 @@ jobs:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v2
-   - run: apt install virtualenv
+   - run: sudo apt install virtualenv
    - run: virtualenv -p /usr/bin/python3 py3
    - run: source py3/bin/activate
    - run: pip install boto3 botocore
