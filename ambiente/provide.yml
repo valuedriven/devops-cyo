@@ -1,0 +1,6 @@
+- name: provide
+  hosts: localhost
+  gather_facts: true
+  become: true
+
+- import_playbook: setup-nginx.yml

@@ -1,5 +1,7 @@
 plugin: amazon.aws.aws_ec2
 
+use_extra_vars: true
+
 cache: true
 cache_plugin: ansible.builtin.jsonfile
 cache_timeout: 7200

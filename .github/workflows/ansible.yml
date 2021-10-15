@@ -13,6 +13,12 @@ jobs:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v2
-   - run: python3 -m pip install boto3 botocore --user
-   - run: ansible-playbook ambiente/provisioning.yml --extra-vars 'ansible_python_interpreter=/usr/bin/python3'
+   - run: apt install virtualenv
+   - run: virtualenv -p /usr/bin/python3 py3
+   - run: source py3/bin/activate
+   - run: pip install boto3 botocore
+   - run: pip install ansible==2.10
+   - run: export ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3
+   - run: ansible-playbook ambiente/provisioning.yml
+   - run: ansible-playbook ambiente/provite.yml --inventory config/inventory.aws_ec2.yml
 

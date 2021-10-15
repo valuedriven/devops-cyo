@@ -1,12 +1,10 @@
 ---
 - name: Instalação de pacotes complementares
-  hosts: "virtual_host_ec2"
+  hosts: all
   gather_facts: true
   become: true
 
   tasks:
-    # - name: configura bibliotecas Python
-    #   import_tasks: setup-python.yml
     - name: Atualização do Yum
       yum:
         name: "*"
