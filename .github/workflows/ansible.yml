@@ -21,7 +21,6 @@ jobs:
       python3 -m venv py3
       source py3/bin/activate
       pip install boto3 botocore
-      pip install ansible==2.10
       export ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3
       echo '::set-output name=ANSIBLE_PYTHON_INTERPRETER::$VIRTUAL_ENV/bin/python3'
       echo "${{ steps.setup-env.outputs.ANSIBLE_PYTHON_INTERPRETER }}"
