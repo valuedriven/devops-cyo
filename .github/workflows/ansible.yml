@@ -18,7 +18,7 @@ jobs:
        python-version: 3.8
    - id: setup-env
      run: |
-      venv -p /usr/bin/python3 py3
+      python3 -m venv py3
       source py3/bin/activate
       pip install boto3 botocore
       pip install ansible==2.10
