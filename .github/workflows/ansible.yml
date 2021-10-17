@@ -12,10 +12,13 @@ jobs:
   setup-environment:
    runs-on: ubuntu-latest
    steps:
-   - uses: actions/checkout@v2
+   - uses: "actions/checkout@v2"
+   - uses: "actions/setup-python@v2"
+     with:
+       python-version: 3.8
    - id: setup-env
      run: |
-      sudo apt install virtualenv
+      pip install virtualenv
       virtualenv -p /usr/bin/python3 py3
       source py3/bin/activate
       pip install boto3 botocore
