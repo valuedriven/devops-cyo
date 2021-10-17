@@ -13,16 +13,16 @@ jobs:
    runs-on: ubuntu-latest
    steps:
    - uses: actions/checkout@v2
-   - name: teste
-     id: setup-env
+   - id: setup-env
      run: |
-      apt install virtualenv
+      sudo apt install virtualenv
       virtualenv -p /usr/bin/python3 py3
       source py3/bin/activate
       pip install boto3 botocore
       pip install ansible==2.10
+      export ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3
       echo '::set-output name=ANSIBLE_PYTHON_INTERPRETER::$VIRTUAL_ENV/bin/python3'
-   - run: echo "${{ steps.setup-env.outputs.ANSIBLE_PYTHON_INTERPRETER }}"
-   - run: echo $ANSIBLE_PYTHON_INTERPRETER | ansible-playbook ambiente/provisioning.yml
-   - run: echo $ANSIBLE_PYTHON_INTERPRETER | ansible-playbook ambiente/provite.yml --inventory config/inventory.aws_ec2.yml
-
+      echo "${{ steps.setup-env.outputs.ANSIBLE_PYTHON_INTERPRETER }}"
+      ansible-playbook ambiente/provisioning.yml
+      ansible-playbook ambiente/provite.yml --inventory config/inventory.aws_ec2.yml
+   
