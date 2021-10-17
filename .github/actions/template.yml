@@ -1,0 +1,17 @@
+---
+name: 'xxx'
+description: 'xxx'
+author: 'GitHub'
+inputs:
+  input1:
+    description: "xxx"
+    default: 'xxx'
+outputs:
+  output1:
+    description: "xxx"
+runs:
+  using: 'xxx'
+  main: 'xxx'
+branding:
+  icon: 'xxx'
+  color: 'xxx'

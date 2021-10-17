@@ -1,0 +1,20 @@
+---
+name: 'setup-python-env'
+description: 'Setup virtual env for Python'
+author: 'jps'
+inputs:
+  input1:
+    description: "xxx"
+    default: 'xxx'
+outputs:
+  output1:
+    description: "xxx"
+runs:
+  using: "composite"
+  steps:
+    - run: | 
+       python3 -m venv py3
+       source py3/bin/activate
+       pip install ansible==2.10
+       echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
+      shell: bash   
