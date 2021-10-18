@@ -20,15 +20,21 @@ jobs:
    - uses: "actions/setup-python@v2"
      with:
        python-version: 3.8
-  #  - uses: "./.github/actions/setup-python-env"
+   - uses: "./.github/actions/setup-python-env"
    - run: |
-       python3 -m venv py3
        source py3/bin/activate
-       python -m pip install --upgrade pip
-       pip install boto3 botocore ansible==2.10
-       ansible-galaxy collection install community.aws
-       echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
        ansible-playbook ambiente/provisioning.yml
+   - run: |
+       source py3/bin/activate
        ansible-playbook ambiente/provide.yml --inventory ambiente/config/inventory.aws_ec2.yml
+  #  - run: |
+  #      python3 -m venv py3
+  #      source py3/bin/activate
+  #      python -m pip install --upgrade pip
+  #      pip install boto3 botocore ansible==2.10
+  #      ansible-galaxy collection install community.aws
+  #      echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
+  #      ansible-playbook ambiente/provisioning.yml
+  #      ansible-playbook ambiente/provide.yml --inventory ambiente/config/inventory.aws_ec2.yml
    
        
