@@ -11,21 +11,26 @@ env:
 jobs:
   setup-environment:
    runs-on: ubuntu-latest
+   env:
+    ANSIBLE_REMOTE_USER: ec2-user
+    ANSIBLE_PRIVATE_KEY_FILE: ambiente/devops-cyo-key
+    ANSIBLE_HOST_KEY_CHECKING: False
    steps:
    - uses: "actions/checkout@v2"
    - uses: "actions/setup-python@v2"
      with:
        python-version: 3.8
-   - uses: ".github/actions/setup-python-env"
+  #  - uses: ".github/actions/setup-python-env"
    - run: echo "$ANSIBLE_PYTHON_INTERPRETER" | ansible-playbook ambiente/provisioning.yml
-   - run: ansible-playbook ambiente/provide.yml --inventory config/inventory.aws_ec2.yml
+   - run: ansible-playbook ambiente/provide.yml --inventory ambiente/config/inventory.aws_ec2.yml
   #  - id: setup-env
   #    run: |
   #     python3 -m venv py3
   #     source py3/bin/activate
+  #     python3 -m pip install --upgrade pip
   #     pip install boto3 botocore
   #     pip install ansible==2.10
   #     export ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3
-  #     ansible-playbook ambiente/provisioning.yml 
-  #     ansible-playbook ambiente/provide.yml --inventory config/inventory.aws_ec2.yml
+  #     ansible-playbook ambiente/provisioning.yml
+  #     ansible-playbook ambiente/provide.yml --inventory ambiente/config/inventory.aws_ec2.yml
    

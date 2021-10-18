@@ -1,7 +1,7 @@
 ---
 name: 'setup-python-env'
 description: 'Setup virtual env for Python'
-author: 'jps'
+author: 'devops-cyo'
 inputs:
   input1:
     description: "xxx"
@@ -15,6 +15,8 @@ runs:
     - run: | 
        python3 -m venv py3
        source py3/bin/activate
-       pip install ansible==2.10
+       python -m pip install --upgrade pip
+       pip install boto3 botocore ansible==2.10
+       ansible-galaxy collection install community.aws
        echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
       shell: bash

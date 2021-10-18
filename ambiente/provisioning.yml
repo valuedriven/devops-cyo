@@ -1,7 +1,7 @@
 - name: provisioning
   hosts: localhost
-  gather_facts: true
-  become: true
+  gather_facts: false
+  become: false
 
 - import_playbook: create-keys.yml
 - import_playbook: create-vpc.yml
