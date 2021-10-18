@@ -26,7 +26,7 @@ runs:
        source py3/bin/activate
        if [ ${{ inputs.inventory }} != '' ]
         then
-         ansible-playbook ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
+         ansible-playbook -vvvvv ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
         else
          ansible-playbook ${{ inputs.playbook }}
        fi
