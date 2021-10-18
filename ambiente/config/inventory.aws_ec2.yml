@@ -1,8 +1,5 @@
 plugin: amazon.aws.aws_ec2
 
-regions:
-  - us-east-1
-
 # cache: true
 # cache_plugin: ansible.builtin.jsonfile
 # cache_timeout: 7200
@@ -24,3 +21,4 @@ groups:
   deployable: "'deployable' in (tags|list)"
 compose:
   ansible_host: public_ip_address
+
