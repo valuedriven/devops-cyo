@@ -21,14 +21,16 @@ runs:
        ansible-galaxy collection install community.aws
        echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
       shell: bash
-    - run: | 
+    - if: inputs.inventory != ''
+      run: | 
        source py3/bin/activate
        ansible-playbook ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
       shell: bash
-      if: inputs.inventory != ''
-    - run: | 
+      
+    - if: inputs.inventory == ''
+      run: | 
        source py3/bin/activate
        ansible-playbook ${{ inputs.playbook }}
       shell: bash
-      if: inputs.inventory == ''
+      
        
