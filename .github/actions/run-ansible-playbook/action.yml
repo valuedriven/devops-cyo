@@ -23,18 +23,18 @@ runs:
        echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
       shell: bash
 
-    - name: run ansible playbook with inventory
-      if: inputs.inventory != ''
+    - name: run ansible playbook with inventory      
       run: | 
        source py3/bin/activate
        ansible-playbook ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
+      if: inputs.inventory != ''
       shell: bash
       
-    - name: run ansible playbook without inventory
-      if: inputs.inventory == ''
+    - name: run ansible playbook without inventory      
       run: | 
        source py3/bin/activate
        ansible-playbook ${{ inputs.playbook }}
+      if: inputs.inventory == ''
       shell: bash
       
        
