@@ -17,4 +17,4 @@ runs:
        source py3/bin/activate
        pip install ansible==2.10
        echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
-      shell: bash   
+      shell: bash

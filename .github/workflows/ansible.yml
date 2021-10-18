@@ -16,13 +16,16 @@ jobs:
    - uses: "actions/setup-python@v2"
      with:
        python-version: 3.8
-   - id: setup-env
-     run: |
-      python3 -m venv py3
-      source py3/bin/activate
-      pip install boto3 botocore
-      pip install ansible==2.10
-      export ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3
-      ansible-playbook ambiente/provisioning.yml
-      ansible-playbook ambiente/provide.yml --inventory config/inventory.aws_ec2.yml
+   - uses: ".github/actions/setup-python-env"
+   - run: echo "$ANSIBLE_PYTHON_INTERPRETER" | ansible-playbook ambiente/provisioning.yml
+   - run: ansible-playbook ambiente/provide.yml --inventory config/inventory.aws_ec2.yml
+  #  - id: setup-env
+  #    run: |
+  #     python3 -m venv py3
+  #     source py3/bin/activate
+  #     pip install boto3 botocore
+  #     pip install ansible==2.10
+  #     export ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3
+  #     ansible-playbook ambiente/provisioning.yml 
+  #     ansible-playbook ambiente/provide.yml --inventory config/inventory.aws_ec2.yml
    
