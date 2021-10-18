@@ -4,14 +4,11 @@ description: 'Run an ansible playbook on a Python virtualenv'
 author: 'devops-cyo'
 inputs:
   playbook:
-    description: ''
     default: ''
   inventory:
-    description: ''
     default: ''
 outputs:
   output1:
-    description: ''
 runs:
   using: "composite"
   steps:
@@ -25,18 +22,14 @@ runs:
        echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
       shell: bash
 
-    - name: run ansible playbook with inventory      
+    - name: run ansible playbook
       run: | 
        source py3/bin/activate
-       ansible-playbook ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
-      if: inputs.inventory != ''
-      # shell: bash
-      
-    - name: run ansible playbook without inventory      
-      run: | 
-       source py3/bin/activate
-       ansible-playbook ${{ inputs.playbook }}
-      if: inputs.inventory == ''
-      # shell: bash
-      
+       if [ ${{ inputs.inventory }} != '' ]
+        then
+         ansible-playbook ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
+        else
+         ansible-playbook ${{ inputs.playbook }}
+       fi
+      shell: bash     
        
