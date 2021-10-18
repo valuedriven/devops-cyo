@@ -24,9 +24,11 @@ runs:
     - run: | 
        source py3/bin/activate
        ansible-playbook ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
+      shell: bash
       if: inputs.inventory != ''
     - run: | 
        source py3/bin/activate
        ansible-playbook ${{ inputs.playbook }}
+      shell: bash
       if: inputs.inventory == ''
        
