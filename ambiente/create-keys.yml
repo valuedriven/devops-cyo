@@ -37,6 +37,7 @@
         mode: 0600
       when: existing_ec2_key_result.msg != "key pair already exists"
       register: keypair_result
+
     - name: Registro de par de chaves no EC2
       amazon.aws.ec2_key:
         name: "{{ access_key }}"
@@ -44,7 +45,8 @@
         key_material: "{{ keypair_result.public_key }}"
         force: true
       when: existing_ec2_key_result.msg != "key pair already exists"
-    - name: Mudança de permissão do arquivo com a private key
+
+    - name: Mudança de permissão do arquivo com a private key para permitir carregamento
       ansible.builtin.file:
         path: "{{ arquivo }}"
         mode: '0644'
@@ -66,3 +68,10 @@
         region: "{{ aws_region }}"
       when: existing_ec2_key_result.msg != "key pair already exists"
       register: secret_manager_result
+
+    - name: Retorno da permissão do arquivo com a private key
+      ansible.builtin.file:
+        path: "{{ arquivo }}"
+        mode: '0600'
+      vars:
+        arquivo: "{{ playbook_dir }}/{{ access_key }}"
