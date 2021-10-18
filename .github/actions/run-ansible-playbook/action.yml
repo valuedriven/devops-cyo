@@ -1,0 +1,32 @@
+---
+name: 'run-ansible-playbook'
+description: 'Run an ansible playbook on a Python virtualenv'
+author: 'devops-cyo'
+inputs:
+  playbook:
+    default: ''
+  inventory:
+    default: ''
+outputs:
+  output1:
+    description: ''
+runs:
+  using: "composite"
+  steps:
+    - run: | 
+       python3 -m venv py3
+       source py3/bin/activate
+       python -m pip install --upgrade pip
+       pip install boto3 botocore ansible==2.10
+       ansible-galaxy collection install community.aws
+       echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
+      shell: bash
+    - run: | 
+       source py3/bin/activate
+       ansible-playbook ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
+      if: inputs.inventory != ''
+    - run: | 
+       source py3/bin/activate
+       ansible-playbook ${{ inputs.playbook }}
+      if: inputs.inventory == ''
+       
