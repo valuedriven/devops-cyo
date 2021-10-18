@@ -20,7 +20,7 @@ jobs:
    - uses: "actions/setup-python@v2"
      with:
        python-version: 3.8
-  #  - uses: ".github/actions/setup-python-env"
+   - uses: "./.github/actions/setup-python-env"
    - run: echo "$ANSIBLE_PYTHON_INTERPRETER" | ansible-playbook ambiente/provisioning.yml
    - run: ansible-playbook ambiente/provide.yml --inventory ambiente/config/inventory.aws_ec2.yml
   #  - id: setup-env
