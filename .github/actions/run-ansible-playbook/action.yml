@@ -4,11 +4,10 @@ description: 'Run an ansible playbook on a Python virtualenv'
 author: 'devops-cyo'
 inputs:
   playbook:
-    default: ''
+    description: 'The playbook to run'
   inventory:
+    description: 'The inventory - if there is'
     default: ''
-outputs:
-  output1:
 runs:
   using: "composite"
   steps:
@@ -31,5 +30,6 @@ runs:
         else
          ansible-playbook ${{ inputs.playbook }}
        fi
-      shell: bash     
+      shell: bash
+
        
