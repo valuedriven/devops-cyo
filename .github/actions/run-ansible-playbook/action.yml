@@ -4,8 +4,10 @@ description: 'Run an ansible playbook on a Python virtualenv'
 author: 'devops-cyo'
 inputs:
   playbook:
+    description: ''
     default: ''
   inventory:
+    description: ''
     default: ''
 outputs:
   output1:
@@ -28,13 +30,13 @@ runs:
        source py3/bin/activate
        ansible-playbook ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
       if: inputs.inventory != ''
-      shell: bash
+      # shell: bash
       
     - name: run ansible playbook without inventory      
       run: | 
        source py3/bin/activate
        ansible-playbook ${{ inputs.playbook }}
       if: inputs.inventory == ''
-      shell: bash
+      # shell: bash
       
        
