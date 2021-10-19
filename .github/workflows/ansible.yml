@@ -32,10 +32,4 @@ jobs:
      uses: "./.github/actions/run-ansible-playbook"
      with:
        playbook: ambiente/provide.yml
-       inventory: ambiente/config/inventory.aws_ec2.yml  
-  #  - run: |
-  #      source py3/bin/activate
-  #      ansible-playbook ambiente/provisioning.yml
-  #  - run: |
-  #      source py3/bin/activate
-  #      ansible-playbook ambiente/provide.yml --inventory ambiente/config/inventory.aws_ec2.yml  
+       inventory: ambiente/config/inventory.aws_ec2.yml 
