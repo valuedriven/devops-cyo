@@ -13,7 +13,7 @@ runs:
   steps:
     - name: setup Python virtualenv and install packages
       run: | 
-       if [ "$ENVIRONMENT_SETUP" != true]
+       if [ "$ENVIRONMENT_SETUP" != true ]
          then 
            python3 -m venv py3
            source py3/bin/activate
