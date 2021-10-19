@@ -13,7 +13,7 @@ runs:
   steps:
     - name: create python virtualenv and install packages
       run: | 
-       if [ "$ENVIROMENT_SETUP" ];
+       if [ "$ENVIRONMENT_SETUP" == "true"]
          then 
            source py3/bin/activate
          else
@@ -22,7 +22,7 @@ runs:
            python -m pip install --upgrade pip
            pip install boto3 botocore ansible==2.10
            ansible-galaxy install -r ambiente/config/requirements.yml
-           echo "ENVIROMENT_SETUP=true >> $GITHUB_ENV
+           echo "ENVIRONMENT_SETUP=true >> $GITHUB_ENV
            echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV           
        fi 
       shell: bash
