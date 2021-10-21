@@ -13,22 +13,20 @@ runs:
   steps:
     - name: setup Python virtualenv and install packages
       run: | 
-       if [ "$ENVIRONMENT_SETUP" != true ]
-         then 
-           python3 -m venv py3
-           source py3/bin/activate
-           python -m pip install --upgrade pip
-           pip install boto3 botocore ansible==2.10
-           ansible-galaxy install -r ambiente/config/requirements.yml           
-           echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
-           echo "ENVIRONMENT_SETUP=true" >> $GITHUB_ENV
-       fi 
+        python3 -m venv py3
+        source py3/bin/activate
+        python -m pip install --upgrade pip
+        pip install boto3 botocore ansible==2.10
+        ansible-galaxy install -r ambiente/config/requirements.yml           
+        echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
+        echo "ENVIRONMENT_SETUP=true" >> $GITHUB_ENV
       shell: bash
 
     - name: run ansible playbook
       run: | 
        source py3/bin/activate
-       which python3
+       which python
+       python --version
        if [ ${{ inputs.inventory }} != '' ]
         then
          ansible-playbook -vvvvv ${{ inputs.playbook }} --inventory ${{ inputs.inventory }}
