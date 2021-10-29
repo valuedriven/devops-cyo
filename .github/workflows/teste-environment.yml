@@ -3,7 +3,8 @@ name: Pipeline
 on:
   push:
     branches: [ main ]
-    if: ${{ github.event.commits[0].message == '[release]' }}
+    commits:
+     - '[deploy]'
 
 # on:
 #   workflow_dispatch
@@ -27,6 +28,7 @@ jobs:
         path: frontend/build
 
   deploy:
+    enviroment: production
     runs-on: ubuntu-latest
     needs: build
     env:
