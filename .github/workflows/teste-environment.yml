@@ -3,7 +3,7 @@ name: Pipeline
 on:
   push:
     branches: [ main ]
-    if: ${{ ${{ github.event.commits[0].message }} == '[release]' }}
+    if: github.event.commits[0].message }} == '[release]'
 
 # on:
 #   workflow_dispatch
