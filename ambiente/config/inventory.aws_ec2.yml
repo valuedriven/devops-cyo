@@ -1,7 +1,5 @@
 plugin: amazon.aws.aws_ec2
 
-#iam_role_arn: arn:aws:iam::426264269534:role/LabRole
-
 regions:
   - us-east-1
  
