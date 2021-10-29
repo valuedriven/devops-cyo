@@ -1,0 +1,33 @@
+name: Pipeline
+
+# on:
+#   push:
+#     branches: [ main ]
+   
+on:
+  workflow_dispatch
+
+jobs:
+  docker_job:
+    container: ruby:3.0.2-slim-bullseye
+    steps:
+      - run: bundle exec rake spec
+
+  connect_db:
+    runs-on: ubuntu-latest
+    container: postgres
+    env:
+      POSTGRES_DB: devops_db
+      POSTGRES_USER: devops_user
+      POSTGRES_PASSWORD: devops_pass
+    services:
+      postgres:
+        image: postgres        
+    steps:
+      - name: Connect to PostgreSQL
+        run: |
+          psql \
+            -h "postgres" \
+            -U "$POSTGRES_USER" \
+            -d "$POSTGRES_DB" \
+            -c "SELECT 'OK' AS status;"
