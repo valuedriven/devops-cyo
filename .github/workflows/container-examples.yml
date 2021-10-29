@@ -16,14 +16,14 @@ jobs:
 
   connect_db:
     runs-on: ubuntu-latest
-    container: postgres
-    env:
-      POSTGRES_DB: devops_db
-      POSTGRES_USER: devops_user
-      POSTGRES_PASSWORD: devops_pass
+    # container: postgres
     services:
       postgres:
-        image: postgres        
+        image: postgres
+        env:
+         POSTGRES_DB: devops_db
+         POSTGRES_USER: devops_user
+         POSTGRES_PASSWORD: devops_pass
     steps:
       - name: Connect to PostgreSQL
         run: |
