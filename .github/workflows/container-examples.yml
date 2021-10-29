@@ -9,6 +9,7 @@ on:
 
 jobs:
   docker_job:
+    runs-on: ubuntu-latest
     container: ruby:3.0.2-slim-bullseye
     steps:
       - run: bundle exec rake spec
