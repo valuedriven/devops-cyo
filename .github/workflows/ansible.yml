@@ -17,7 +17,7 @@ jobs:
    runs-on: ubuntu-latest
    env:
     ANSIBLE_REMOTE_USER: ec2-user
-    ANSIBLE_PRIVATE_KEY_FILE: ambiente/devops-cyo-key
+    ANSIBLE_SSH_PRIVATE_KEY_FILE: ambiente/devops-cyo-key
     ANSIBLE_HOST_KEY_CHECKING: False
    steps:
    - uses: "actions/checkout@v2"
