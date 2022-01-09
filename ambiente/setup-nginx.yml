@@ -1,0 +1,25 @@
+---
+- name: Instalação de pacotes complementares
+  hosts: all
+  gather_facts: true
+  become: true
+  become_method: dzdo
+
+  tasks:
+    - name: Atualização do Yum
+      yum:
+        name: "*"
+        # state: latest
+
+    - name: Habilitação Nginx para Amazon linux 2
+      shell: "amazon-linux-extras enable nginx1"
+
+    - name: Instalação do Nginx
+      yum:
+        name: nginx
+        # state: latest
+
+    - name: Habilitação do Nginx como serviço
+      service:
+        name: nginx
+        state: started

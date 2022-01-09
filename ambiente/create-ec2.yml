@@ -1,0 +1,37 @@
+---
+- name: Provisionamento de Instância
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  vars_files:
+    - vars/global.yml
+    - vars/vpc.yml
+    - vars/instance.yml
+
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
+
+  vars:
+    subnet_id: "{{ hostvars['virtual_host']['subnet_id'] }}"
+  tasks:
+    - name: Provisionamento de instância
+      community.aws.ec2_instance:
+        region: "{{ aws_region }}"
+        vpc_subnet_id: "{{ subnet_id }}"
+        name: "{{ instance_name }}"
+        key_name: "{{ access_key }}"
+        security_group: "{{ security_group_name }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ image_id }}"
+        network:
+          assign_public_ip: true
+        tags:
+          sistema: "{{ project_name }}"
+          ambiente: "production"
+          deployable: true
+        wait: true
+        state: running
+      register: ec2_result

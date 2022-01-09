@@ -1,0 +1,77 @@
+---
+- name: Criação e registro de pares de chave
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  vars_files:
+    - vars/global.yml
+
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
+
+  tasks:
+    # - name: Verificação da existência de chave no EC2
+    #   amazon.aws.ec2_key:
+    #     name: "{{ access_key }}"
+    #     region: "{{ aws_region }}"
+    #     force: false
+    #   register: existing_ec2_key_result
+
+    # - name: Recuperação do conteúdo da chave privada
+    #   ansible.builtin.copy:
+    #     content: "{{ lookup('amazon.aws.aws_secret', access_key, region=aws_region) }}"
+    #     dest: "{{ playbook_dir }}/{{ access_key }}"
+    #     mode: 0600
+    #   when: existing_ec2_key_result.msg == "key pair already exists"
+    #   register: private_key
+
+    - name: Criação de pares de chave
+      community.crypto.openssh_keypair:
+        path: "{{ playbook_dir }}/{{ access_key }}"
+        size: 4096
+        type: rsa
+        force: true
+        mode: 0600
+      # when: existing_ec2_key_result.msg != "key pair already exists"
+      register: keypair_result
+
+    - name: Registro de par de chaves no EC2
+      amazon.aws.ec2_key:
+        name: "{{ access_key }}"
+        region: "{{ aws_region }}"
+        key_material: "{{ keypair_result.public_key }}"
+        force: true
+      # when: existing_ec2_key_result.msg != "key pair already exists"
+
+    # - name: Mudança de permissão do arquivo com a private key para permitir carregamento
+    #   ansible.builtin.file:
+    #     path: "{{ arquivo }}"
+    #     mode: '0644'
+    #   vars:
+    #     arquivo: "{{ playbook_dir }}/{{ access_key }}"
+
+    # - name: Carregamento da chave privada para memória
+    #   set_fact:
+    #     private_key_result: "{{ lookup('file', arquivo) }}"
+    #   vars:
+    #     arquivo: "{{ playbook_dir }}/{{ access_key }}"
+
+    # - name: Registro da chave privada no AWS Secret
+    #   community.aws.aws_secret:
+    #     name: "{{ access_key }}"
+    #     state: present
+    #     secret_type: 'string'
+    #     secret: "{{ private_key_result }}"
+    #     region: "{{ aws_region }}"
+    #   when: existing_ec2_key_result.msg != "key pair already exists"
+    #   register: secret_manager_result
+
+    # - name: Retorno da permissão do arquivo com a private key
+    #   ansible.builtin.file:
+    #     path: "{{ arquivo }}"
+    #     mode: '0600'
+    #   vars:
+    #     arquivo: "{{ playbook_dir }}/{{ access_key }}"

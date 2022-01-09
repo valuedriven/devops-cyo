@@ -1,0 +1,8 @@
+- name: provisioning
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+- import_playbook: create-vpc.yml
+- import_playbook: create-keys.yml
+- import_playbook: create-ec2.yml
