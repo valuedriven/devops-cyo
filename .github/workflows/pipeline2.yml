@@ -18,4 +18,4 @@ jobs:
     runs-on: ubuntu-latest
     needs: build    
     steps:    
-    - run: echo "stage deploy
+    - run: echo "stage deploy"
