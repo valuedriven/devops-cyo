@@ -15,6 +15,7 @@ jobs:
           path: build-result.txt
 
   deploy:
+    if: "contains(github.event.head_commit.message, '[deploy]')"
     runs-on: ubuntu-latest
     needs: build
     steps:
