@@ -1,0 +1,11 @@
+name: workflow dispatch event
+
+on:
+   workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: step para a ilustrar eventos
+        run: echo Hello, world!
