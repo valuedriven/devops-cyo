@@ -2,8 +2,8 @@ name: exemplos de eventos
 
 on:
   schedule:
-    - cron: '5 * * * *'
-
+    - cron: '6 * * * *'
+    
 jobs:
   job1:
     runs-on: ubuntu-latest
