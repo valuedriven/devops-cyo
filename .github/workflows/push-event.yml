@@ -8,5 +8,5 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: step para a ilustrar eventos
+      - name: step para a ilustrar eventos.
         run: echo Hello, world!
