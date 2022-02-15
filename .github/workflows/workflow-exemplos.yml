@@ -2,7 +2,7 @@ name: exemplos de eventos
 
 on:
   schedule:
-    - cron: '0/5 * * * *'
+    - cron: '*/5 * * * *'
     
 jobs:
   job1:
