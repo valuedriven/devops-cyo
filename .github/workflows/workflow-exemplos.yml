@@ -1,8 +1,7 @@
 name: exemplos de eventos
 
 on:
-  schedule:
-    - cron: '*/2 * * * *'
+  workflow_dispatch:
     
 jobs:
   job1:
