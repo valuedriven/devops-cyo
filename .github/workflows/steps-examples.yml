@@ -1,0 +1,13 @@
+name: steps examples
+
+on:
+  push
+
+jobs:
+  marketplace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: node --version
