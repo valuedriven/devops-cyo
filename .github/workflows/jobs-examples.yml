@@ -1,7 +1,8 @@
 name: jobs examples
 
 on:
-   push
+   #push
+   workflow_dispatch:
 
 jobs:
   build:
