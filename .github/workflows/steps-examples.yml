@@ -19,7 +19,7 @@ jobs:
     name: Example of custom action
     steps:
       - id: step-caller
-        uses: actions/hello-action@v1
+        uses: .github/actions/hello@v1
         with:
           who-to-greet: 'Myself'
       - run: echo random-number ${{ steps.step-caller.outputs.random-number }}
