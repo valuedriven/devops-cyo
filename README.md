@@ -1,4 +1,3 @@
-## TODO
-https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html
+# DevOps - CYO
 
-https://github.com/ansible-collections/amazon.aws/
+Example of application...
