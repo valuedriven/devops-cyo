@@ -13,3 +13,14 @@ jobs:
           node-version: '14'
       - name: shows node version configured.
         run: node --version
+
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Example of custom action
+    steps:
+      - id: step-caller
+        uses: actions/hello-action@v1
+        with:
+          who-to-greet: 'Myself'
+      - run: echo random-number ${{ steps.step-caller.outputs.random-number }}
+        shell: bash
