@@ -1,7 +1,9 @@
 name: steps examples
 
 on:
-  push
+  #push
+  workflow_dispatch:
+    
 
 jobs:
   marketplace:
