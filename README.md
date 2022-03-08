@@ -1,3 +1,3 @@
 # DevOps - CYO
 
-Example of application...
+Repository with DevOps practices examples.
