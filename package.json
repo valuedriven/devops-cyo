@@ -1,0 +1,19 @@
+{
+  "name": "devops-cyo",
+  "version": "1.0.0",
+  "description": "Example of application...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valuedriven/devops-cyo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valuedriven/devops-cyo/issues"
+  },
+  "homepage": "https://github.com/valuedriven/devops-cyo#readme"
+}
