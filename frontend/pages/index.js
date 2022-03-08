@@ -11,6 +11,7 @@ export default function Home() {
       <main>
         <p />
         <h1>Welcome to DevOps-Cyo!</h1>
+        <h2>Version 2.0!</h2>
       </main>
     </div>
   );
