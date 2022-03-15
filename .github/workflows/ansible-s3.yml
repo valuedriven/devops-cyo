@@ -45,4 +45,6 @@ jobs:
           pip install boto3 botocore ansible==2.10
           echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
           echo "ENVIRONMENT_SETUP=true" >> $GITHUB_ENV
-      - run: ansible-playbook .environment/s3.yml
+      - run: |
+          source py3/bin/activate
+          ansible-playbook .environment/s3.yml
