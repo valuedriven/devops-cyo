@@ -8,6 +8,15 @@
         name: devops-cyo2
         state: present
 
+    - name: Find files
+      find:
+        paths: .
+        patterns: '*.*'
+        register: output
+
+    - debug: var=item.path
+      with_items: '{{ output.files }}'
+
     - name: copy files
       amazon.aws.aws_s3:
         bucket: devops-cyo2
