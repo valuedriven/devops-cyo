@@ -30,10 +30,6 @@ jobs:
       AWS_EC2_METADATA_DISABLED: true
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: deploy
-          path: frontend/out
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
@@ -45,6 +41,12 @@ jobs:
           pip install boto3 botocore ansible==2.10
           echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
           echo "ENVIRONMENT_SETUP=true" >> $GITHUB_ENV
+      - uses: actions/download-artifact@v2
+        with:
+          name: deploy
+          path: frontend/out
       - run: |
+          ls -la
           source py3/bin/activate
+          ls -la
           ansible-playbook .environment/s3.yml
