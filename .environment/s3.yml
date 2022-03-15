@@ -9,9 +9,7 @@
         state: present
 
     - name: copy files
-      amazon.aws.aws_s3:
+      community.aws.s3_sync:
         bucket: devops-cyo2
-        object: /website
-        src: frontend/out
-        mode: put
+        file_root: frontend/out
         permission: public-read
