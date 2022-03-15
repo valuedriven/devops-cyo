@@ -21,6 +21,6 @@
       amazon.aws.aws_s3:
         bucket: devops-cyo2
         object: /
-        src: ./frontend/out
+        src: frontend/out
         mode: put
         permission: public-read
