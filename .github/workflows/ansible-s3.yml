@@ -37,4 +37,4 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - run: ansible-playbook .environment/ansible-s3.yml
+      - run: ansible-playbook .environment/s3.yml
