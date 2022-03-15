@@ -1,8 +1,10 @@
 name: ansible s3
 
-on:
-  push:
-    branches: [main]
+on: workflow_dispatch
+
+# on:
+#   push:
+#     branches: [main]
 
 jobs:
   build:
