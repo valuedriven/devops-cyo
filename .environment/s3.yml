@@ -7,7 +7,6 @@
       amazon.aws.s3_bucket:
         name: devops-cyo2
         state: present
-        permission: public-read
 
     - name: copy files
       amazon.aws.aws_s3:
@@ -15,3 +14,4 @@
         object: /
         src: frontend/out
         mode: put
+        permission: public-read
