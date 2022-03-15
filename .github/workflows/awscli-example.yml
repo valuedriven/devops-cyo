@@ -1,18 +1,20 @@
 name: AWS CLI example
 
-on:
-  push:
-    branches: [ main ]
+on: workflow_dispatch
+
+# on:
+#   push:
+#     branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2   
-    - uses: actions/upload-artifact@v2
-      with:
-        name: deploy
-        path: README.md
+      - uses: actions/checkout@v2
+      - uses: actions/upload-artifact@v2
+        with:
+          name: deploy
+          path: README.md
 
   deploy:
     runs-on: ubuntu-latest
@@ -23,8 +25,8 @@ jobs:
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       AWS_EC2_METADATA_DISABLED: true
     steps:
-    - uses: actions/download-artifact@v2
-      with:
-        name: deploy
-        path: README.md
-    - run: aws s3 cp README.md s3://devops-cyo --recursive --acl public-read  
+      - uses: actions/download-artifact@v2
+        with:
+          name: deploy
+          path: README.md
+      - run: aws s3 cp README.md s3://devops-cyo --recursive --acl public-read
