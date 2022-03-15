@@ -12,7 +12,7 @@
       find:
         paths: .
         patterns: '*.*'
-        register: output
+      register: output
 
     - debug: var=item.path
       with_items: '{{ output.files }}'
