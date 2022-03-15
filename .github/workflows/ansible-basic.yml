@@ -3,7 +3,7 @@ name: Ansible basic
 on: workflow_dispatch
 
 jobs:
-  ansible-version:
+  ansible-ping:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
