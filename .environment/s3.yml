@@ -1,0 +1,17 @@
+---
+- name: Create S3 bucket and deploy artifacts
+  hosts: localhost
+
+  tasks:
+    - name: config bucket
+      amazon.aws.s3_bucket:
+        name: devops-cyo2
+        state: present
+        permission: public-read
+
+    - name: copy files
+      amazon.aws.aws_s3:
+        bucket: devops-cyo2
+        object: /
+        src: frontend/out
+        mode: put
