@@ -51,4 +51,4 @@ jobs:
       - name: files upload
         run: |
           source py3/bin/activate
-          ansible-playbook -vvvv .environment/s3.yml
+          ansible-playbook .environment/s3.yml
