@@ -1,35 +1,30 @@
 name: Ansible
 
-on:
-  workflow_dispatch
-
-# on:
-#   push:
-#     branches: [ main ]
+on: workflow_dispatch
 
 env:
-   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-   AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
 jobs:
   setup-environment:
-   runs-on: ubuntu-latest
-   env:
-    ANSIBLE_REMOTE_USER: ec2-user
-    ANSIBLE_SSH_PRIVATE_KEY_FILE: ambiente/devops-cyo-key
-    ANSIBLE_HOST_KEY_CHECKING: False
-   steps:
-   - uses: "actions/checkout@v2"
-   - uses: "actions/setup-python@v2"
-     with:
-       python-version: 3.8
-   - name: Provisionamento de instância
-     uses: "./.github/actions/run-ansible-playbook"
-     with:
-       playbook: ambiente/provisioning.yml
-   - name: Configuração de instância
-     uses: "./.github/actions/run-ansible-playbook"
-     with:
-       playbook: ambiente/provide.yml
-       inventory: ambiente/config/inventory.aws_ec2.yml 
+    runs-on: ubuntu-latest
+    env:
+      ANSIBLE_REMOTE_USER: ec2-user
+      ANSIBLE_SSH_PRIVATE_KEY_FILE: ambiente/devops-cyo-key
+      ANSIBLE_HOST_KEY_CHECKING: False
+    steps:
+      - uses: 'actions/checkout@v2'
+      - uses: 'actions/setup-python@v2'
+        with:
+          python-version: 3.8
+      - name: Provisionamento de instância
+        uses: './.github/actions/run-ansible-playbook'
+        with:
+          playbook: ambiente/provisioning.yml
+      - name: Configuração de instância
+        uses: './.github/actions/run-ansible-playbook'
+        with:
+          playbook: ambiente/provide.yml
+          inventory: ambiente/config/inventory.aws_ec2.yml
