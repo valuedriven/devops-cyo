@@ -48,8 +48,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: deploy
-          path: frontend/out
-      - run: cp -R frontend/out .environment
+          path: .environment/frontend/out
       - name: run playbook
         run: |
           source py3/bin/activate
