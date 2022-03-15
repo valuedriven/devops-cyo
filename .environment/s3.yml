@@ -5,11 +5,11 @@
   tasks:
     - name: config bucket
       amazon.aws.s3_bucket:
-        name: devops-cyo2
+        name: devops-cyo
         state: present
 
     - name: copy files
       community.aws.s3_sync:
-        bucket: devops-cyo2
+        bucket: devops-cyo
         file_root: frontend/out
         permission: public-read

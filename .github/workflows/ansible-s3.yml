@@ -1,8 +1,5 @@
 name: ansible s3
 
-# on:
-#   workflow_dispatch:
-
 on:
   push:
     branches: [main]
@@ -49,7 +46,7 @@ jobs:
         with:
           name: deploy
           path: .environment/frontend/out
-      - name: run playbook
+      - name: files upload
         run: |
           source py3/bin/activate
           ansible-playbook -vvvv .environment/s3.yml

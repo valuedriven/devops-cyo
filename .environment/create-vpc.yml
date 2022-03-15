@@ -1,0 +1,87 @@
+---
+- name: Criação de VPC, Subnet, Internet gateway, Route table, Security group
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: true
+  vars_files:
+    - vars/global.yml
+    - vars/vpc.yml
+
+  # environment:
+  #   AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+  #   AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+  #   AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
+
+  tasks:
+    #   - name: configura bibliotecas Python
+    #     import_tasks: setup-python.yml
+
+    - name: Criação de VPC
+      ec2_vpc_net:
+        region: '{{ aws_region }}'
+        name: '{{ vpc_name }}'
+        cidr_block: '{{ vpcCidrBlock }}'
+        dns_support: yes
+        dns_hostnames: yes
+        tenancy: default
+        tags:
+          Name: '{{ vpc_name }}'
+      register: vpc_result
+
+    - name: Criação de subnet
+      ec2_vpc_subnet:
+        region: '{{ aws_region }}'
+        az: '{{ aws_availability_zone }}'
+        vpc_id: '{{ vpc_result.vpc.id }}'
+        cidr: '{{ subNetCidrBlock }}'
+        map_public: yes
+        tags:
+          Name: '{{ subnet_name }}'
+      register: subnet_result
+
+    - name: Criação de internet gateway
+      ec2_vpc_igw:
+        region: '{{ aws_region }}'
+        vpc_id: '{{ vpc_result.vpc.id }}'
+        tags:
+          Name: '{{ igw_name }}'
+      register: igw_result
+
+    - name: Criação de route table
+      ec2_vpc_route_table:
+        region: '{{ aws_region }}'
+        vpc_id: '{{ vpc_result.vpc.id }}'
+        subnets: ['{{ subnet_result.subnet.id }}']
+        tags:
+          Name: '{{ route_table_name }}'
+        routes:
+          - dest: '{{ destinationCidrBlock }}'
+            gateway_id: '{{ igw_result.gateway_id }}'
+      register: public_route_table
+
+    - name: Criação de security group
+      ec2_group:
+        region: '{{ aws_region }}'
+        vpc_id: '{{ vpc_result.vpc.id }}'
+        name: '{{ security_group_name }}'
+        description: '{{ security_group_name }}'
+        tags:
+          Name: '{{ security_group_name }}'
+        rules:
+          - proto: tcp
+            ports:
+              - 22
+            cidr_ip: '{{ port22CidrBlock }}'
+            rule_desc: allow all on port 22
+          - proto: tcp
+            ports:
+              - 80
+            cidr_ip: '{{ port80CidrBlock }}'
+            rule_desc: allow all on port 80
+      register: security_group_result
+
+    - name: Registro do id da subnet
+      add_host:
+        name: 'virtual_host'
+        subnet_id: '{{ subnet_result.subnet.id }}'

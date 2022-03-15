@@ -1,0 +1,11 @@
+---
+vpc_name: '{{ project_name }}-vpc'
+subnet_name: '{{ project_name }}-subnet'
+igw_name: '{{ project_name }}-igw'
+route_table_name: '{{ project_name }}-route-table'
+vpcCidrBlock: '10.0.0.0/16'
+subNetCidrBlock: '10.0.0.0/24'
+port22CidrBlock: '0.0.0.0/0'
+port80CidrBlock: '0.0.0.0/0'
+destinationCidrBlock: '0.0.0.0/0'
+security_group_name: '{{ project_name }}-security-group'
