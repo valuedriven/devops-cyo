@@ -12,6 +12,7 @@
       find:
         paths: .
         patterns: '*.*'
+        recurse: true
       register: output
 
     - debug: var=item.path
