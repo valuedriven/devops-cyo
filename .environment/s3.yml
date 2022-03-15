@@ -8,20 +8,10 @@
         name: devops-cyo2
         state: present
 
-    - name: Find files
-      find:
-        paths: .
-        patterns: '*.*'
-        recurse: true
-      register: output
-
-    - debug: var=item.path
-      with_items: '{{ output.files }}'
-
     - name: copy files
       amazon.aws.aws_s3:
         bucket: devops-cyo2
-        object: /
+        object: /website
         src: frontend/out
         mode: put
         permission: public-read
