@@ -10,4 +10,4 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - run: ansible-playbook environment/ping.yml
+      - run: ansible-playbook .environment/ping.yml
