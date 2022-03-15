@@ -52,4 +52,4 @@ jobs:
       - name: run playbook
         run: |
           source py3/bin/activate
-          ansible-playbook .environment/s3.yml
+          ansible-playbook -vvvv .environment/s3.yml
