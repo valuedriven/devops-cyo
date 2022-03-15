@@ -49,7 +49,7 @@ jobs:
         with:
           name: deploy
           path: frontend/out
-      - run: cp frontend/out .environment/frontend/out
+      - run: cp -r frontend/out .environment/frontend/out
 
       - name: run playbook
         run: |
