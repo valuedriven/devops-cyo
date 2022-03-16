@@ -1,7 +1,5 @@
 name: Ansible App
 
-# on: workflow_dispatch
-
 on:
   push:
     branches: [main]
@@ -30,4 +28,4 @@ jobs:
       - name: create vpc
         run: |
           source py3/bin/activate
-          ansible-playbook .environment/create-vpc.yml
+          ansible-playbook .environment/provisioning.yml
