@@ -32,7 +32,6 @@
         tags:
           sistema: '{{ project_name }}'
           ambiente: 'production'
-        deployable: true
-        wait: yes
+        wait: true
         state: running
       register: ec2_result
