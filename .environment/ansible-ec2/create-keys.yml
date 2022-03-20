@@ -41,12 +41,3 @@
         private_key_result: "{{ lookup('file', arquivo) }}"
       vars:
         arquivo: '{{ playbook_dir }}/{{ access_key }}'
-
-    - name: Registro da chave privada no AWS Secret
-      community.aws.aws_secret:
-        name: '{{ access_key }}'
-        state: present
-        secret_type: 'string'
-        secret: '{{ private_key_result }}'
-        region: '{{ aws_region }}'
-      register: secret_manager_result

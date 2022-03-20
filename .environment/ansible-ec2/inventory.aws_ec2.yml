@@ -1,0 +1,17 @@
+plugin: amazon.aws.aws_ec2
+
+filters:
+  tag:environment:
+    - production
+
+keyed_groups:
+  - key: tags.system
+    prefix: tag_system_
+    separator: ''
+  - key: tags.environment
+    prefix: tag_environment_
+    separator: ''
+groups:
+  deployable: "'deployable' in (tags|list)"
+compose:
+  ansible_host: public_ip_address

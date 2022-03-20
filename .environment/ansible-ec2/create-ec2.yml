@@ -30,8 +30,8 @@
         network:
           assign_public_ip: true
         tags:
-          sistema: '{{ project_name }}'
-          ambiente: 'production'
+          system: '{{ project_name }}'
+          environment: 'production'
         wait: true
         state: running
       register: ec2_result

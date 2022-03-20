@@ -28,4 +28,5 @@ jobs:
       - name: provisioning
         run: |
           source py3/bin/activate
-          ansible-playbook .environment/provisioning.yml
+          ansible-playbook .environment/ansible-ec2/provisioning.yml
+          ansible-playbook .environment/ansible-ec2//setup-nginx.yml --inventory environment/ansible-ec2/inventory.aws_ec2.yml
