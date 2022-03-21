@@ -16,13 +16,13 @@ jobs:
   setup-environment:
     runs-on: ubuntu-latest
     steps:
-      - name: get timezone
-        run: timedatectl
-      - uses: szenius/set-timezone@v1.0
-        with:
-          timezoneLinux: 'America/Sao_Paulo'
-      - name: get timezone after changes
-        run: timedatectl
+      # - name: get timezone
+      #   run: timedatectl
+      # - uses: szenius/set-timezone@v1.0
+      #   with:
+      #     timezoneLinux: 'America/Sao_Paulo'
+      # - name: get timezone after changes
+      #   run: timedatectl
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
