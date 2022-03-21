@@ -2,3 +2,5 @@ node_modules
 py3
 ambiente/devops-cyo-key
 ambiente/devops-cyo-key.pub
+.environment/ansible-ec2/devops-cyo-key
+.environment/ansible-ec2/devops-cyo-key.pub
