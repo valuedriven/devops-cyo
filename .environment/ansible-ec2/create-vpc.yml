@@ -15,7 +15,7 @@
 
   tasks:
     - name: verify date time
-      debug: msg="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}
+      debug: msg="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
     - name: Criação de VPC
       ec2_vpc_net:
         region: '{{ aws_region }}'
