@@ -11,11 +11,9 @@
   environment:
     AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
     AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
-    AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
+    # AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
 
   tasks:
-    - name: verify date time
-      debug: msg="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
     - name: Criação de VPC
       ec2_vpc_net:
         region: '{{ aws_region }}'
