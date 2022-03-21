@@ -8,6 +8,9 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+  ANSIBLE_REMOTE_USER: ec2-user
+  ANSIBLE_PRIVATE_KEY_FILE: .environment/ansible-ec2/devops-cyo-key
+  ANSIBLE_HOST_KEY_CHECKING: 'False'
 
 jobs:
   setup-environment:
@@ -32,4 +35,4 @@ jobs:
       - name: provide
         run: |
           source py3/bin/activate
-          ansible-playbook -vvvvv .environment/ansible-ec2/setup-nginx.yml --inventory .environment/ansible-ec2/aws_ec2.yml
+          ansible-playbook .environment/ansible-ec2/setup-nginx.yml --inventory .environment/ansible-ec2/inventory_aws_ec2.yml

@@ -29,15 +29,12 @@
         key_material: '{{ keypair_result.public_key }}'
         force: yes
 
-    - name: Mudança de permissão do arquivo com a private key
+    - name: Mudança de permissão do arquivo com a public key
       ansible.builtin.file:
-        path: '{{ arquivo }}'
+        path: '{{ item }}'
         mode: '0644'
-      vars:
-        arquivo: '{{ playbook_dir }}/{{ access_key }}'
-
-    - name: Carregamento da chave privada para memória
-      set_fact:
-        private_key_result: "{{ lookup('file', arquivo) }}"
-      vars:
-        arquivo: '{{ playbook_dir }}/{{ access_key }}'
+      loop:
+        [
+          '{{ playbook_dir }}/{{ access_key }}',
+          '{{ playbook_dir }}/{{ access_key }}.pub',
+        ]
