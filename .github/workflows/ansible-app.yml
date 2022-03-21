@@ -31,7 +31,7 @@ jobs:
       - name: provisioning
         run: |
           source py3/bin/activate
-          ansible-playbook .environment/ansible-ec2/provisioning.yml
+          ansible-playbook -vvv .environment/ansible-ec2/provisioning.yml
       - name: provide
         run: |
           source py3/bin/activate

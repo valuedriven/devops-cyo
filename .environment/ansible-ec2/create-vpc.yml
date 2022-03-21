@@ -14,7 +14,7 @@
     AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
 
   tasks:
-    - name: Set timezone to Asia/Tokyo
+    - name: Set timezone
       community.general.timezone:
         name: America/Sao_Paulo
 
