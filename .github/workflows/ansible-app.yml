@@ -29,4 +29,7 @@ jobs:
         run: |
           source py3/bin/activate
           ansible-playbook .environment/ansible-ec2/provisioning.yml
-          ansible-playbook .environment/ansible-ec2//setup-nginx.yml --inventory environment/ansible-ec2/inventory.aws_ec2.yml
+      - name: provide
+        run: |
+          source py3/bin/activate
+          ansible-playbook -vvvvv .environment/ansible-ec2/setup-nginx.yml --inventory .environment/ansible-ec2/aws_ec2.yml
