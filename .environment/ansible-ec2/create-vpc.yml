@@ -14,10 +14,6 @@
     AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
 
   tasks:
-    # - name: Set timezone
-    #   community.general.timezone:
-    #     name: America/Sao_Paulo
-
     - name: Criação de VPC
       ec2_vpc_net:
         region: '{{ aws_region }}'
