@@ -16,7 +16,7 @@
   tasks:
     - name: Set timezone to Asia/Tokyo
       community.general.timezone:
-        name: US/Eastern
+        name: America/Sao_Paulo
 
     - name: Criação de VPC
       ec2_vpc_net:
