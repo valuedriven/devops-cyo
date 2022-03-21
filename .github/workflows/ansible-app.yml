@@ -16,9 +16,13 @@ jobs:
   setup-environment:
     runs-on: ubuntu-latest
     steps:
+      - name: get timezone
+        run: timedatectl
       - uses: szenius/set-timezone@v1.0
         with:
           timezoneLinux: 'America/Sao_Paulo'
+      - name: get timezone after changes
+        run: timedatectl
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
@@ -34,7 +38,7 @@ jobs:
       - name: provisioning
         run: |
           source py3/bin/activate
-          ansible-playbook -vvv .environment/ansible-ec2/provisioning.yml
+          ansible-playbook .environment/ansible-ec2/provisioning.yml
       - name: provide
         run: |
           source py3/bin/activate
