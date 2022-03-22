@@ -17,8 +17,6 @@ env:
 jobs:
   setup-environment:
     runs-on: ubuntu-latest
-    # env:
-    # ANSIBLE_PRIVATE_KEY_FILE: $ANSIBLE_PLAYBOOK_PATH/$PRIVATE_KEY
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -43,4 +41,5 @@ jobs:
       - name: provide
         run: |
           source py3/bin/activate
+          echo "ANSIBLE_PRIVATE_KEY_FILE=$ANSIBLE_PLAYBOOK_PATH/$PRIVATE_KEY" >> $GITHUB_ENV
           ansible-playbook $ANSIBLE_PLAYBOOK_PATH/setup-nginx.yml --inventory $ANSIBLE_PLAYBOOK_PATH/inventory_aws_ec2.yml
