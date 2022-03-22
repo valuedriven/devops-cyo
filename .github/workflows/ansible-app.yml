@@ -9,7 +9,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: us-east-1
   # AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-  ANSIBLE_PLAYBOOK_PATH: .environment/ansible-ec2/
+  ANSIBLE_PLAYBOOK_PATH: .environment/ansible-ec2
   ANSIBLE_REMOTE_USER: ec2-user
   PRIVATE_KEY: devops-cyo-key
   ANSIBLE_HOST_KEY_CHECKING: 'False'
