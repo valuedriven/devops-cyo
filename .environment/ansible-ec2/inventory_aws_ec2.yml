@@ -2,7 +2,7 @@ plugin: amazon.aws.aws_ec2
 
 aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
 aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
-aws_session_token: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
+# aws_session_token: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
 
 filters:
   tag:environment:

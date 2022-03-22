@@ -42,4 +42,5 @@
           environment: 'production'
         wait: true
         state: running
+        # user_data: "{{lookup('file', '{{ user_data_file }}') }}"
       register: ec2_result
