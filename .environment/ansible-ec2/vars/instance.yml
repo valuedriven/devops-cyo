@@ -3,4 +3,4 @@ instance_name: '{{ project_name }}-ec2'
 instance_type: t2.micro
 image_id: ami-02e136e904f3da870
 user_data_file: ec2-user-data.sh
-iam_role: LabRole
+iam_role: LabInstanceProfile
