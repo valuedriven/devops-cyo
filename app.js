@@ -17,6 +17,6 @@ const PORT = 8888;
 
 app.listen(PORT, () => {
   console.log(
-    `horus intentionally vulnerable test API is running on port: ${PORT}`
+    `horus intentionally vulnerable test API is running on port-: ${PORT}`
   );
 });
