@@ -8,8 +8,10 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   # AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+  ANSIBLE_PLAYBOOK_PATH: .environment/ansible-ec2/
   ANSIBLE_REMOTE_USER: ec2-user
-  ANSIBLE_PRIVATE_KEY_FILE: .environment/ansible-ec2/devops-cyo-key
+  PRIVATE_KEY: devops-cyo-key
+  ANSIBLE_PRIVATE_KEY_FILE: $ANSIBLE_PLAYBOOK_PATH/$PRIVATE_KEY
   ANSIBLE_HOST_KEY_CHECKING: 'False'
 
 jobs:
@@ -28,11 +30,15 @@ jobs:
           pip install boto3 botocore ansible==2.10
           echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
           echo "ENVIRONMENT_SETUP=true" >> $GITHUB_ENV
+      - name: create key pair
+        run: |
+          ssh-keygen -t rsa -N "" -f $ANSIBLE_PRIVATE_KEY_FILE
+          chmod 400 $ANSIBLE_PRIVATE_KEY_FILE.pub
       - name: provisioning
         run: |
           source py3/bin/activate
-          ansible-playbook .environment/ansible-ec2/provisioning.yml
+          ansible-playbook $ANSIBLE_PLAYBOOK_PATH/provisioning.yml
       - name: provide
         run: |
           source py3/bin/activate
-          ansible-playbook .environment/ansible-ec2/setup-nginx.yml --inventory .environment/ansible-ec2/inventory_aws_ec2.yml
+          ansible-playbook $ANSIBLE_PLAYBOOK_PATH/setup-nginx.yml --inventory $ANSIBLE_PLAYBOOK_PATH/inventory_aws_ec2.yml
