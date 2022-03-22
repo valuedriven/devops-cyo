@@ -11,12 +11,13 @@ env:
   ANSIBLE_PLAYBOOK_PATH: .environment/ansible-ec2/
   ANSIBLE_REMOTE_USER: ec2-user
   PRIVATE_KEY: devops-cyo-key
-  ANSIBLE_PRIVATE_KEY_FILE: ${{ env.ANSIBLE_PLAYBOOK_PATH }}/${{ env.PRIVATE_KEY }}
   ANSIBLE_HOST_KEY_CHECKING: 'False'
 
 jobs:
   setup-environment:
     runs-on: ubuntu-latest
+    env:
+      ANSIBLE_PRIVATE_KEY_FILE: $ANSIBLE_PLAYBOOK_PATH/$PRIVATE_KEY
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
