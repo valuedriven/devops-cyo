@@ -14,7 +14,7 @@
     AWS_SESSION_TOKEN: "{{ lookup('env', 'AWS_SESSION_TOKEN') }}"
 
   tasks:
-    - name: Criação de VPC
+    - name: VPC creation
       ec2_vpc_net:
         region: '{{ aws_region }}'
         name: '{{ vpc_name }}'
@@ -26,7 +26,7 @@
           Name: '{{ vpc_name }}'
       register: vpc_result
 
-    - name: Criação de subnet
+    - name: Subnet creation
       ec2_vpc_subnet:
         region: '{{ aws_region }}'
         az: '{{ aws_availability_zone }}'
@@ -37,7 +37,7 @@
           Name: '{{ subnet_name }}'
       register: subnet_result
 
-    - name: Criação de internet gateway
+    - name: Internet gateway creation
       ec2_vpc_igw:
         region: '{{ aws_region }}'
         vpc_id: '{{ vpc_result.vpc.id }}'
@@ -45,7 +45,7 @@
           Name: '{{ igw_name }}'
       register: igw_result
 
-    - name: Criação de route table
+    - name: Route table creation
       ec2_vpc_route_table:
         region: '{{ aws_region }}'
         vpc_id: '{{ vpc_result.vpc.id }}'
@@ -57,7 +57,7 @@
             gateway_id: '{{ igw_result.gateway_id }}'
       register: public_route_table
 
-    - name: Criação de security group
+    - name: Security group creation
       ec2_group:
         region: '{{ aws_region }}'
         vpc_id: '{{ vpc_result.vpc.id }}'

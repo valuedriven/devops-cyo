@@ -1,4 +1,4 @@
-name: Ansible App
+name: Ansible Provisioning
 
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
         run: |
           source py3/bin/activate
           ansible-playbook $ANSIBLE_PLAYBOOK_PATH/provisioning.yml
-      - name: provide
-        run: |
-          source py3/bin/activate
-          ansible-playbook $ANSIBLE_PLAYBOOK_PATH/setup-nginx.yml --inventory $ANSIBLE_PLAYBOOK_PATH/inventory_aws_ec2.yml
+      # - name: provide
+      #   run: |
+      #     source py3/bin/activate
+      #     ansible-playbook $ANSIBLE_PLAYBOOK_PATH/setup-nginx.yml --inventory $ANSIBLE_PLAYBOOK_PATH/inventory_aws_ec2.yml
