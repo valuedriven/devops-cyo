@@ -30,6 +30,7 @@ jobs:
           pip install boto3 botocore ansible==2.10
           echo "ANSIBLE_PYTHON_INTERPRETER=$VIRTUAL_ENV/bin/python3" >> $GITHUB_ENV
           echo "ENVIRONMENT_SETUP=true" >> $GITHUB_ENV
+          echo "ANSIBLE_PRIVATE_KEY_FILE=$ANSIBLE_PLAYBOOK_PATH/$PRIVATE_KEY" >> $GITHUB_ENV
       - name: create key pair
         run: |
           ssh-keygen -t rsa -N "" -f $ANSIBLE_PLAYBOOK_PATH/$PRIVATE_KEY
@@ -41,5 +42,4 @@ jobs:
       - name: provide
         run: |
           source py3/bin/activate
-          echo "ANSIBLE_PRIVATE_KEY_FILE=$ANSIBLE_PLAYBOOK_PATH/$PRIVATE_KEY" >> $GITHUB_ENV
           ansible-playbook $ANSIBLE_PLAYBOOK_PATH/setup-nginx.yml --inventory $ANSIBLE_PLAYBOOK_PATH/inventory_aws_ec2.yml
